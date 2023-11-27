@@ -1,0 +1,11 @@
+select
+NULLIF
+(
+(
+select details2.start_time-details2.end_time as flight_time from
+(
+select details.start_time,details.end_time from
+(SELECT f.start_time ,f.end_time ,a.city_name as start_city ,a.city_name as end_city
+from flights f,airports a
+where f.start_port=a.port_code and f.end_port=a.port_code) details  where start_city='New York' or end_city='Tokyo') details2)
+,NULL)
